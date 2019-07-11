@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import Auth from './Auth'
 import AsyncStorage from '@react-native-community/async-storage'
 import auth from '@react-native-firebase/auth'
 import { AccessToken, LoginManager } from 'react-native-fbsdk'
 
-function AuthContainer(props) {
-
-	const [initilizing, setInitilizing] = useState(true)
-	const [user, setUser] = useState()
-
-	onAuthStateChanged = (user) => {
-		setUser(user);
-		if (initilizing) setInitilizing(false);
-	}
-
-	useEffect(() => {
-		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-		return subscriber; // unsubscribe on unmount
-	}, [])
+class AuthContainer extends Component {
 
 	facebookLogin = () => {
 		return LoginManager.logInWithPermissions(['public_profile', 'email'])
@@ -43,7 +30,7 @@ function AuthContainer(props) {
 			})
 			.then( res => {
 				console.log("TCL: facebookLogin -> user firebase", res.user)
-				props.navigation.navigate('AuthLoading')
+				this.props.navigation.navigate('AuthLoading')
 				
 			})
 			.catch(console.log)
@@ -62,14 +49,11 @@ function AuthContainer(props) {
 		}
 	}
 
-	signInAsync = async () => {
-		await AsyncStorage.setItem('userToken', 'abc')
-		props.navigation.navigate('App')
+	// if (initilizing) return null
+
+	render() {
+		return <Auth facebookLogin={this.facebookLogin} register={this.register} navigation={this.props.navigation}/>
 	}
-
-	if (initilizing) return null
-
-	return <Auth facebookLogin={facebookLogin} register={register} signInAsync={signInAsync} navigation={props.navigation}/>
 }
 
 export default AuthContainer

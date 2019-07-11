@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, View, Text } from 'react-native'
-
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 // // import Auth from './Auth
 
 // function Auth(props) {
@@ -22,10 +22,27 @@ class SignInScreen extends Component {
 
 	render() {
 		return (
-			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-				<Text>Bienvenido a Manex</Text>
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue' }}>
+				<View style={{ width: wp('65%'), height: hp('25%'), backgroundColor: 'red', marginBottom: 16 }}>
+					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+						<Text style={{ color: 'white', fontWeight: 'bold', fontSize: 17 }}>Here goes the logo</Text>
+					</View>
+				</View>
+				<View style={{ width: wp('90%'), height: hp('45%'), backgroundColor: 'yellow', marginBottom: 16, alignItems: 'center', padding: 16  }}>
+					<View style={{ marginBottom: 16 }}>
+						<Text style={{ color: 'black', fontWeight: 'bold', fontSize: 21 }}>Bienvenido a Manex</Text>
+					</View>
+					<View>
+						
+					</View>
+
+				</View>
+				<View style={{ width: wp('90%'), height: hp('18%'), backgroundColor: 'pink', alignItems: 'center' }}>
+					<Button title="Inicio de sesión con Facebook" onPress={() => this.props.facebookLogin()} />
+				</View>
+				{/* <Text>Bienvenido a Manex</Text>
 				
-				<Button title="Sign in!" onPress={() => this.props.facebookLogin()} />
+				<Button title="Sign in!" onPress={() => this.props.facebookLogin()} /> */}
 			</View>
 		);
 	}

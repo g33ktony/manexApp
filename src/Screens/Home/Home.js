@@ -9,7 +9,7 @@ class HomeScreen extends Component {
 
 	signOut = () => {
 		auth().signOut()
-		this.props.navigation.navigate('AuthLoading')
+		this.props.navigation.navigate('Auth')
 		// AsyncStorage.removeItem('userToken')
 
 	}

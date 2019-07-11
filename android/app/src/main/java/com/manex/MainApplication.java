@@ -3,9 +3,9 @@ package com.manex;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.bugsnag.BugsnagReactNative;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.bugsnag.BugsnagReactNative;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;

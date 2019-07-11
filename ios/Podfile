@@ -57,11 +57,12 @@ target 'manex' do
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
-  pod 'BugsnagReactNative', :path => '../node_modules/bugsnag-react-native'
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'BugsnagReactNative', :path => '../node_modules/bugsnag-react-native'
 
   target 'manexTests' do
     inherit! :search_paths

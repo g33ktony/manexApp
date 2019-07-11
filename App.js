@@ -16,18 +16,18 @@ import MainNavigation from './src/Router'
 const bugsnag = new Client("927de12043e4c5cd34edefd73fd6de29");
 
 
-export default class App extends Component {
+ class App extends Component {
 
   componentDidMount() {
     // bugsnag.notify(new Error("Test error"));
   }
-
-
-
+  
   render() {
     return <MainNavigation/>
   }
 }
+
+export default App
 
 const styles = StyleSheet.create({
   container: {
