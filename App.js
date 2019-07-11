@@ -8,94 +8,24 @@
 
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Client } from 'bugsnag-react-native'
+// import firebase from '@react-native-firebase/app'
+// import database from '@react-native-firebase/database'
+import MainNavigation from './src/Router'
 
-import firebase from '@react-native-firebase/app'
-import database from '@react-native-firebase/database'
-import auth from '@react-native-firebase/auth'
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk'
-
-// TODO(you): import any additional firebase services that you require for your app, e.g for auth:
-//    1) install the npm package: `yarn add @react-native-firebase/auth@alpha` - you do not need to
-//       run linking commands - this happens automatically at build time now
-//    2) rebuild your app via `yarn run run:android` or `yarn run run:ios`
-//    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
-//    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu',
-})
-
-const firebaseCredentials = Platform.select({
-  ios: 'https://invertase.link/firebase-ios',
-  android: 'https://invertase.link/firebase-android',
-})
+const bugsnag = new Client("927de12043e4c5cd34edefd73fd6de29");
 
 
 export default class App extends Component {
 
   componentDidMount() {
-    
+    // bugsnag.notify(new Error("Test error"));
   }
 
-  facebookLogin = async () => {
-    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
-    console.log("TCL: App -> componentDidMount -> result", result)
 
-    if (result.isCancelled) {
-      throw new Error('User cancelled the login process');
-    }
-    const data = await AccessToken.getCurrentAccessToken();
-    console.log("TCL: App -> componentDidMount -> data", data)
-
-    if (!data) {
-      throw new Error('Something went wrong obtaining access token');
-    }
-    const credential = auth.FacebookAuthProvider.credential(data.accessToken);
-    await firebase.auth().signInWithCredential(credential);
-  }
-
-  register = async (email, password)  => {
-    try {
-      await auth().createUserWithEmailAndPassword(email, password);
-    } catch (e) {
-      console.error(e.message);
-    }
-  }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native + Firebase!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        {!firebase.apps.length && (
-          <Text style={styles.instructions}>
-            {`\nYou currently have no Firebase apps registered, this most likely means you've not downloaded your project credentials. Visit the link below to learn more. \n\n ${firebaseCredentials}`}
-          </Text>
-        )}
-        <TouchableOpacity onPress={ () => this.facebookLogin() }>
-          <Text>facbook login</Text>
-        </TouchableOpacity>
-        {/* <LoginButton
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("login has error: " + result.error);
-              } else if (result.isCancelled) {
-                console.log("login is cancelled.");
-              } else {
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    console.log(data.accessToken.toString())
-                  }
-                )
-              }
-            }
-          }
-          onLogoutFinished={() => console.log("logout.")} /> */}
-      </View>
-    )
+    return <MainNavigation/>
   }
 }
 
